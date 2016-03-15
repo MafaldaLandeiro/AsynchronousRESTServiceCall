@@ -12,16 +12,20 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class GreetingLookUpService {
-	private static final Logger log = LoggerFactory.getLogger(GreetingLookUpService.class);
-	
+	private static final Logger log = LoggerFactory
+			.getLogger(GreetingLookUpService.class);
+
 	RestTemplate restTemplate = new RestTemplate();
 
-    @Async
-    public Future<Greeting> getGreeting(String name) throws InterruptedException {
-    	log.info("Looking up " + name);
-        Greeting result = restTemplate.getForObject("http://localhost:8080/getGreeting?name=".concat(name), Greeting.class);
-        Thread.sleep(1000L);
-        return new AsyncResult<Greeting>(result);
-    }
+	@Async
+	public Future<Greeting> getGreeting(String name)
+			throws InterruptedException {
+		log.info("Looking up " + name);
+		Greeting result = restTemplate.getForObject(
+				"http://localhost:8080/getGreeting?name=".concat(name),
+				Greeting.class);
+		Thread.sleep(1000L);
+		return new AsyncResult<Greeting>(result);
+	}
 
 }
